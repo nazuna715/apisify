@@ -1,0 +1,9 @@
+fastapi==0.75.0
+uvicorn==0.17.6
+ulid-py==1.1.0
+pybotters==0.11.1
+pandas-gbq==0.17.4
+google-cloud-bigquery==2.34.2
+tenacity==8.0.1
+pysqlitecipher==0.22
+toml==0.10.2

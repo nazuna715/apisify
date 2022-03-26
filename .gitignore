@@ -1,0 +1,4 @@
+apisify.toml
+.env
+*.pyc
+*.sqlite3
