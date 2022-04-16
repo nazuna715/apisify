@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9.12-bullseye
 
 ENV APP_HOME /apisifyview
 WORKDIR $APP_HOME
