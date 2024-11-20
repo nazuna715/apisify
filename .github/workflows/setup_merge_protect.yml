@@ -1,18 +1,18 @@
-name: Apply Initial Settings
+name: Apply Repository Settings
 
 on:
   push:
     branches:
-      - main
+      - main  # デフォルトブランチ名を指定
+
+permissions:
+  contents: write
 
 jobs:
-  branch-protection:
+  set_branch_protection:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up GitHub CLI
-        uses: actions/checkout@v3
-
-      - name: Configure Branch Protection
+      - name: Set Branch Protection Rules
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -24,5 +24,5 @@ jobs:
             -f enforce_admins=true \
             -f required_pull_request_reviews.dismiss_stale_reviews=true \
             -f required_pull_request_reviews.require_code_owner_reviews=true \
-            -f required_pull_request_reviews.required_approving_review_count=2 \
+            -f required_pull_request_reviews.required_approving_review_count=1 \
             -F restrictions=
