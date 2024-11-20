@@ -1,0 +1,28 @@
+name: Apply Initial Settings
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  branch-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up GitHub CLI
+        uses: actions/checkout@v3
+
+      - name: Configure Branch Protection
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/branches/main/protection \
+            -f required_status_checks.contexts='["ci/test", "ci/lint"]' \
+            -f enforce_admins=true \
+            -f required_pull_request_reviews.dismiss_stale_reviews=true \
+            -f required_pull_request_reviews.require_code_owner_reviews=true \
+            -f required_pull_request_reviews.required_approving_review_count=2 \
+            -F restrictions=
